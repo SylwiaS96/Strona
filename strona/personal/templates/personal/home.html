@@ -1,0 +1,195 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+	<title>Regresja</title>
+	<meta charset="utf-8" />
+</head>
+
+<body class="body">
+	<div style="position: absolute; left: 250px; right: 250px">
+		<p> <center>  <h1>Poniżej zostały przedstawione poniższe kroki analizowania danych, zawartych w zbiorze. </h1></center></p>
+		<p><font size="4">Najpierw należało wczytać dane, wyświetlić początkowe elementy.
+		Następnie sprawdzić strukturę danych, aby wiedzieć z czym będziemy pracować.</font> </p>
+		<p><font face='Courier New'> library(ggplot2)<br>
+		rowery <- read.csv("C:/Users/Sylwia/Documents/r-programy/Bike-Sharing-Dataset/day.csv")<br>
+		head(rowery, 10)<br>
+		</font></p>
+		<p>
+			<table border = "2" cellpadding="5">
+				<tr>
+				<th>instant </th><th>dteday</th><th>season</th><th>yr</th><th>mnth</th><th>holiday</th><th>weekday</th><th>workingday</th><th>weathersit</th><th>temp</th><th>atemp</th><th>hum</th><th>windspeed</th><th>casual</th><th>registered</th><th>cnt</th>
+				</tr>
+				<tr>
+				<td align="center">1</td><td align="center">01.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">6</td><td align="center">0</td><td align="center">2</td><td align="center">0.344167</td><td align="center">0.363625</td><td align="center">0.805833</td><td align="center">0.160446</td><td align="center">331</td><td align="center">654</td><td align="center">985</td>
+				</tr>
+				<tr>
+				<td align="center">2</td><td align="center">02.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">0	</td><td align="center">0</td><td align="center">2</td><td align="center">0.363478</td><td align="center">0.353739</td><td align="center">0.696087</td><td align="center">0.248539</td><td align="center">131</td><td align="center">670</td><td align="center">801</td>
+				</tr>
+				<tr>
+				<td align="center">3</td><td align="center">03.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">1</td><td align="center">1</td><td align="center">0.196364</td><td align="center">0.189405</td><td align="center">0.437273</td><td align="center">0.248309</td><td align="center">120</td><td align="center">1229</td><td align="center">1349</td>
+				</tr>
+				<tr>
+				<td align="center">4</td><td align="center">04.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">2</td><td align="center">1</td><td align="center">1</td><td align="center">0.2</td><td align="center">0.212122</td><td align="center">0.590435</td><td align="center">0.160296</td><td align="center">108</td><td align="center">1454</td><td align="center">1562</td>
+				</tr>
+				<tr>
+				<td align="center">5</td><td align="center">05.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">3</td><td align="center">1</td><td align="center">1</td><td align="center">0.226957</td><td align="center">0.22927</td><td align="center">0.436957</td><td align="center">0.1869</td><td align="center">82</td><td align="center">1518</td><td align="center">1600</td>
+				</tr>
+				<tr>
+				<td align="center">6</td><td align="center">06.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">4</td><td align="center">1</td><td align="center">1</td><td align="center">0.204348</td><td align="center">0.233209</td><td align="center">0.518261</td><td align="center">0.0895652</td><td align="center">88</td><td align="center">1518</td><td align="center">1606</td>
+				</tr>
+				<tr>
+				<td align="center">7</td><td align="center">07.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">5</td><td align="center">1</td><td align="center">2</td><td align="center">0.196522</td><td align="center">0.208839</td><td align="center">0.498696</td><td align="center">0.168726</td><td align="center">148</td><td align="center">1362</td><td align="center">1510</td>
+				</tr>
+				<tr>
+				<td align="center">8</td><td align="center">08.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">6</td><td align="center">0</td><td align="center">2</td><td align="center">0.165</td><td align="center">0.162254</td><td align="center">0.535833</td><td align="center">0.266804</td><td align="center">68</td><td align="center">891</td><td align="center">959</td>
+				</tr>
+				<tr>
+				<td align="center">9</td><td align="center">09.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">0</td><td align="center">0</td><td align="center">1</td><td align="center">0.138333</td><td align="center">0.116175</td><td align="center">0.434167</td><td align="center">0.36195</td><td align="center">54</td><td align="center">768</td><td align="center">822</td>
+				</tr>
+				<tr>
+				<td align="center">10</td><td align="center">10.01.2011</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">0</td><td align="center">1</td><td align="center">1</td><td align="center">1</td><td align="center">0.150833</td><td align="center">0.150888</td><td align="center">0.482917</td><td align="center">0.223267</td><td align="center">41</td><td align="center">1280</td><td align="center">1321</td>
+				</tr>
+			</table>
+		</p>
+		
+		
+		
+		<p><font size="4"> Utworzyłam wstępne okrojenie danych, na których zamierzam pracować. 
+		Wyświetliłam strukturę tych danych oraz sprawdziłam czy w danych o prędkości wiatru nie ma pustego miejsca.</font></p>
+		<p><font face='Courier New'> 
+		#okrojenie danych, na ktorych bede pracowac<br>
+		rowery1 <- rowery[ , c(10,11,13)] <br>
+
+		str(rowery1)<br>
+		is.na(rowery1$windspeed)<br>
+		sum(is.na(rowery1$windspeed))<br>
+	
+		wiatr <- rowery1$windspeed<br>
+		wiatrNoNa <- wiatr[!is.na(rowery1$windspeed)]<br>
+		wiatrNoNa<br>
+		mean(wiatrNoNa)<br>
+		wiatrNa <- wiatr[is.na(rowery1$windspeed)]<br>
+		wiatrNa<br> <br> <br> 
+		     0.160446 0.248539 0.248309 0.160296 0.1869 0.0895652 0.168726 0.266804 0.36195 0.223267 0.122132 0.304627 0.301 0.126548 0.157963 0.188433 0.194017 0.146775 0.208317 0.195904 0.353242 0.17197 0.2466 0.15833 0.129796 0.29385 0.113837 0.1233 0.145365 0.0739826 0.187192 0.053213 0.264308 0.277752 0.127839 0.161079 0.1418 0.0454083 0.36195 0.188839 0.221935 0.10855 0.203367 0.260883 0.417908 0.291374 0.251791 0.230104 0.264925 0.507463 0.223235 0.307846 0.195683 0.094113 0.250496 0.346539 0.186571 0.125248 0.289686 0.216425 0.307833 0.225754 0.203346 0.251871 0.343287 0.341352 0.12065 0.22015 0.261877 0.23297 0.220775 0.270604 0.136926 0.184309 0.203117 0.209579 0.231017 0.368167 0.207721 0.288783 0.22575 0.234261 0.243787 0.230725 0.209571 0.1843 0.212204 0.226996 0.172888 0.217646 0.258708 0.197146 0.182213 0.385571 0.388067 0.263063 0.162312 0.226992 0.133083 0.146767 0.324474 0.274879 0.250617 0.1107 0.226375 0.340808 0.303496 0.163567 0.157971 0.241925 0.325258 0.219521 0.230725 0.192175 0.185333 0.3265 0.3122 0.320908 0.240063 0.235075 0.106354 0.183454 0.342667 0.328996 0.295392 0.228246 0.16045 0.0746375 0.176 0.115671 0.120642 0.189667 0.179725 0.13495 0.152979 0.126871 0.277354 0.201492 0.108213 0.125013 0.12065 0.148008 0.233842 0.207092 0.154233 0.199642 0.240679 0.230092 0.213938 0.131225 0.111329 0.207092 0.292287 0.253121 0.123142 0.138692 0.121896 0.187808 0.136817 0.149883 0.140554 0.15485 0.163567 0.30535 0.269283 0.167912 0.206471 0.143029 0.119408 0.102 0.155475 0.171025 0.172262 0.238804 0.222025 0.209571 0.0945333 0.107588 0.144283 0.261821 0.185312 0.102608 0.115062 0.228858 0.0814792 0.126258 0.149883 0.1592 0.225129 0.167912 0.183471 0.282337 0.200254 0.146133 0.240667 0.182833 0.208342 0.245033 0.215804 0.1306 0.113817 0.222021 0.1331 0.131221 0.169171 0.0908083 0.200258 0.183463 0.178479 0.174138 0.168537 0.164813 0.156717 0.20585 0.135583 0.19715 0.184696 0.22825 0.201487 0.192175 0.151121 0.200258 0.164796 0.125621 0.211454 0.222633 0.208954 0.236329 0.143667 0.233208 0.139308 0.104467 0.248754 0.27675 0.146763 0.253108 0.210833 0.0839625 0.375617 0.304659 0.159825 0.125008 0.0833333 0.141796 0.139929 0.185325 0.206467 0.212696 0.343943 0.0970208 0.192748 0.124379 0.153608 0.115054 0.088913 0.141804 0.1673 0.271146 0.164183 0.189675 0.178483 0.151742 0.134954 0.0964042 0.128125 0.0783667 0.0783833 0.0503792 0.1107 0.118171 0.148629 0.172883 0.206475 0.292296 0.222013 0.0833458 0.205854 0.17725 0.134954 0.0223917 0.0454042 0.06345 0.0423042 0.143042 0.24815 0.141787 0.223883 0.258083 0.281717 0.175379 0.110087 0.243339 0.422275 0.221396 0.0926667 0.0995125 0.118792 0.166658 0.148642 0.197763 0.229479 0.351371 0.176617 0.10635 0.135571 0.0820917 0.136817 0.271779 0.189062 0.0920542 0.057225 0.0690375 0.0621958 0.189067 0.314675 0.212062 0.281721 0.306596 0.199633 0.136829 0.305362 0.168533 0.224496 0.18595 0.138054 0.118792 0.335825 0.167304 0.0988958 0.0684208 0.208954 0.142122 0.258092 0.271158 0.220158 0.100754 0.0957833 0.0839583 0.0622083 0.232583 0.266175 0.240058 0.0827167 0.233221 0.0665417 0.06345 0.14055 0.0609583 0.268042 0.260575 0.243167 0.169779 0.172896 0.0615708 0.2214 0.047275 0.274246 0.190304 0.155091 0.239465 0.18845 0.293961 0.119412 0.134337 0.220154 0.192167 0.329665 0.365671 0.1847 0.129987 0.167908 0.174758 0.191542 0.0989 0.187552 0.131221 0.180967 0.378108 0.187183 0.251258 0.231358 0.34913 0.415429 0.220158 0.20275 0.222642 0.199638 0.110708 0.123767 0.161071 0.0733958 0.342667 0.210829 0.24005 0.215792 0.261817 0.189067 0.187187 0.178496 0.121896 0.175996 0.1538 0.147379 0.133721 0.194037 0.116929 0.289796 0.409212 0.167283 0.141179 0.1816 0.091425 0.205846 0.190929 0.253112 0.229083 0.205717 0.234471 0.190913 0.237567 0.421642 0.205229 0.268033 0.193417 0.179117 0.226987 0.144904 0.161079 0.334571 0.228858 0.200875 0.345779 0.441563 0.4148 0.22575 0.222587 0.207713 0.23695 0.115062 0.149883 0.113192 0.110704 0.126883 0.162317 0.121271 0.0895583 0.117562 0.1163 0.192783 0.220775 0.386821 0.187192 0.291671 0.31965 0.138067 0.250617 0.172267 0.312139 0.100133 0.180975 0.219529 0.300388 0.274871 0.232596 0.358196 0.249375 0.295274 0.290429 0.155471 0.190917 0.225129 0.284829 0.273629 0.167912 0.0659292 0.149871 0.283587 0.344546 0.303496 0.249383 0.118792 0.176625 0.347633 0.129975 0.116908 0.171638 0.156096 0.138058 0.133696 0.162938 0.152992 0.149879 0.230721 0.296029 0.216412 0.314063 0.236937 0.123133 0.225117 0.212692 0.147392 0.122512 0.229475 0.136817 0.083975 0.254367 0.233204 0.118167 0.102 0.172896 0.14055 0.198992 0.215171 0.196521 0.2954 0.134329 0.195279 0.237563 0.186562 0.184087 0.284833 0.209575 0.077125 0.15735 0.175383 0.144287 0.133721 0.207713 0.214546 0.343279 0.253733 0.176617 0.166667 0.144904 0.174746 0.148017 0.113812 0.118787 0.182842 0.179721 0.145525 0.300383 0.347642 0.271775 0.17165 0.165417 0.161071 0.168529 0.195267 0.126237 0.13495 0.194029 0.146142 0.163554 0.125629 0.180975 0.151737 0.151733 0.146775 0.08085 0.143679 0.166667 0.164187 0.114429 0.137442 0.165429 0.208967 0.2133 0.0939208 0.138683 0.211454 0.1648 0.284813 0.152992 0.15735 0.170396 0.153617 0.165425 0.141179 0.129354 0.215792 0.257458 0.290421 0.129354 0.116908 0.1107 0.1561 0.238813 0.206479 0.122512 0.136212 0.169158 0.169771 0.141796 0.231354 0.177867 0.08645 0.129979 0.0727708 0.0702833 0.0845958 0.0721458 0.244408 0.228858 0.128733 0.190925 0.112562 0.0771167 0.168533 0.113187 0.0640708 0.151121 0.236321 0.187808 0.142421 0.171646 0.281104 0.224496 0.258713 0.0920542 0.131846 0.0827208 0.103863 0.247521 0.0901833 0.151742 0.357587 0.215175 0.118167 0.154229 0.283583 0.223258 0.142404 0.236321 0.2444 0.134342 0.164179 0.227604 0.134958 0.0908042 0.104475 0.0665458 0.117546 0.10635 0.268025 0.141162 0.189679 0.1903 0.187821 0.181596 0.235092 0.146142 0.278612 0.296037 0.182221 0.101371 0.236937 0.134954 0.117537 0.166054 0.0814833 0.0945458 0.0727792 0.124375 0.132467 0.235692 0.398008 0.3582 0.213009 0.166667 0.157346 0.266175 0.270529 0.179108 0.236325 0.173513 0.304108 0.347835 0.214558 0.0578458 0.1275 0.173517 0.342046 0.199625 0.152987 0.171025 0.179729 0.227612 0.235067 0.082725 0.103246 0.0528708 0.148021 0.376871 0.1505 0.04665 0.237562 0.210821 0.115522 0.0584708 0.0597042 0.124379 0.0827208 0.174129 0.324021 0.174754 0.1306 0.101379 0.157975 0.190308 0.296037 0.162937 0.174129 0.131229 0.10635 0.100742 0.0982583 0.221404 0.184092 0.132463 0.374383 0.407346 0.133083 0.0772304 0.168726 0.316546 0.350133 0.155471 0.124383 0.350754 0.154846 
+
+
+		</font></p>
+		<p> <font size="4">Po takiej analizie mogłam utworzyć wykresy </font></p>
+		<p><font face='Courier New'> 
+		ggplot(rowery1, aes(x=windspeed)) + <br>
+		geom_density() +<br>
+		ggtitle("Predkosc wiatru") +<br>
+		labs(x="Predkosc wiatru")<br>
+		</font></p>
+		
+		
+		<center><a href="https://ibb.co/j2qQgm"><img src="https://image.ibb.co/mTShSR/predkosc.png" alt="predkosc" border="0"></a></center>
+		<p><font size="4">Kolejnym wykresem jaki utworzyłam to zależność pogody od sezonu. 
+		Dodatkowo kolory poszczególnych punktów zależą od panującej wtedy temperatury. 
+		W komentarzach kodu są zamieszczone opisy numerów sezonu i pogody.</font> </p>
+		<p><font face='Courier New'> 
+		#pogoda <br>
+		#- 1: Clear, Few clouds, Partly cloudy, Partly cloudy<br>
+		#- 2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist<br>
+		#- 3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds<br>
+		#- 4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog<br><br>
+
+		#sezon<br>
+		#1:springer,<br>
+		#2:summer,<br>
+		#3:fall,<br>
+		#4:winter<br>
+
+		ggplot(rowery, aes(x=season, y=weathersit, colour = temp)) +<br>
+		geom_jitter() +<br>
+		ggtitle("Wystepowanie pogody w sezonie") +<br>
+		labs(x="Sezon", y="Pogoda", colour="temperatura")<br>
+		</font></p>
+		<center><a href="https://ibb.co/ewH5gm"><img src="https://image.ibb.co/fy1nu6/pogoda.png" alt="pogoda" border="0"></a></center>
+		
+		<p><font size="4">Poniższe linie kodu będą przygotowywać dane do stworzenia regresji liniowej. 
+		Po dłuższym zastanowieniu chciałam uzyskać zależność między prędkością wiatru a temperatura odczuwalną.</font><p>
+
+		<p><font face='Courier New'> 
+		lm.fit=lm(windspeed~atemp, data=rowery) </br>
+		attach(rowery) </br>
+		lm.fit=lm(windspeed~atemp) </br>
+		lm.fit </br>
+		</font><p>
+		
+		<p><font size="4">
+		Wyniki jakie otrzymałam: </font><p>
+		<p><font face='Courier New'>
+		Call: </br>
+		lm(formula = windspeed ~ atemp) </br>  </br>
+
+		Coefficients: </br>
+		(Intercept)  &nbsp       atemp   </br>
+			0.23191  &nbsp &nbsp   -0.08733  </br></font><p>
+		
+		<p><font face='Courier New'>
+		summary(lm.fit)</br>
+		names(lm.fit) </br>
+		coef(lm.fit) </br>
+		confint(lm.fit) </br> </br> </br>
+		
+		Call:</br>
+		lm(formula = windspeed ~ atemp)</br> </br>
+
+		Residuals:</br>
+		Min        1Q    Median        3Q       Max </br>
+		-0.165470 -0.053018 -0.009019  0.043687  0.309732 </br>
+
+		Coefficients:</br>
+           &nbsp   Estimate Std.&nbsp  Error t value &nbsp Pr(>|t|) 	</br>   
+		(Intercept) &nbsp  0.231913  &nbsp  0.008683 &nbsp  26.708  &nbsp < 2e-16 ***</br>
+		atemp    &nbsp    -0.087333  &nbsp  0.017314 &nbsp  -5.044 &nbsp 5.76e-07 ***</br>
+		---</br>
+		Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</br>
+
+		Residual standard error: 0.07623 on 729 degrees of freedom</br>
+		Multiple R-squared:  0.03372,	Adjusted R-squared:  0.0324 </br>
+		F-statistic: 25.44 on 1 and 729 DF,  p-value: 5.756e-07</br></br>
+
+		'coefficients' 'residuals' 'effects' 'rank' 'fitted.values' 'assign' 'qr' 'df.residual' 'xlevels' 'call' 'terms' 'model' </br>
+		</br></br>
+
+
+	(Intercept)  &nbsp   0.231913114910848</br>
+	&nbsp atemp &nbsp &nbsp    -0.0873333086145591</br>
+	
+	<table border = "2" cellpadding="5">
+	<tr>
+		<th></th><th>2.5 %</th><th>97.5 %</th></tr>
+	
+	<tr><td align="center">(Intercept)</td><td align="center">	0.2148657</td><td align="center"> 	0.24896052</td></tr>
+	<tr><td align="center">atemp</td><td align="center">	-0.1213242 </td><td align="center">	-0.05334246</td></tr>
+	</table >
+	</font><p>
+	<p><font size="4">	W kolejnych kodach sprawdzam jak różnią się wartości przewidywania i ufności. </font><p>
+	<p><font face='Courier New'>	predict(lm.fit, data.frame(atemp=(c(5,10,15))), interval ="confidence")</font><p>
+	<p><table border = "2" cellpadding="5">
+	<tr><th></th><th>fit</th><th>lwr</th><th>upr</th></tr>
+	<tr><td align="center">1</td><td align="center">-0.2047534 </td><td align="center">-0.3586835 </td><td align="center">-0.05082332</td></tr>
+	<tr><td align="center">2</td><td align="center">-0.6414200</td><td align="center">	-0.9981629</td><td align="center">-0.284677009</td></tr>
+	<tr><td align="center">3</td><td align="center">-1.0780865</td><td align="center">-1.5718566</td><td align="center">-0.58431645</td></tr></table></p>		
+		</font><p>
+		<p><font face='Courier New'> predict(lm.fit, data.frame(atemp=(c(5,10,15))), interval ="prediction")</font><p>
+		<p><table border = "2" cellpadding="5">
+		<tr><th></th><th>fit</th><th>lwr</th><th>upr</th></tr>
+		<tr><td align="center"> 1	</td><td align="center">-0.2047534 </td><td align="center">	-0.4194457 </td><td align="center">	0.009938877</td></tr>
+		<tr><td align="center">2</td><td align="center">	-0.6414200 </td><td align="center">	-0.9981629</td><td align="center"> 	-0.284677009</td></tr>
+		<tr><td align="center">3	</td><td align="center">-1.0780865 </td><td align="center">	-1.5940392 </td><td align="center">	-0.562133816</td></tr></table></p>
+	
+	<p><font size="4">Jak widać przewidywanie nie wiele różni się od ufności. Teraz tworzę wykres punktowy tych danych, następnie nakładam wykres liniowy. </font><p>
+	<p><font face='Courier New'>plot(atemp, windspeed, pch=16, main="Predkosc wiatru zalezna od temperatury odczuwalnej",</br>
+     xlab="temperatura odczuwalna", ylab="predkosc wiatru")</br>
+abline(lm.fit, lwd=6, col="red")</br></font><p>
+<center><a href="https://ibb.co/mO3d1m"><img src="https://image.ibb.co/grFDZ6/regresja.png" alt="regresja" border="0"></a></center>
+	<p><font size="4">Jak widać z wykresu, im temperatura odczuwalna jest wyższa, tym niższa jest prędkość wiatru. </br></font><p>
+	
+	
+	
+	</body>
+</html>
